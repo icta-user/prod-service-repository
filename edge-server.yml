@@ -159,5 +159,3 @@ tokenIssuer: MASL
 tokenSecret: MASLTokenSecret
 tokenSubject: MASLServerAccess
 tokenId: MASLTokenId
-    
-    
