@@ -8,124 +8,57 @@ endpoints:
     enabled: true
   health:
     sensitive: false
-  mapping:
-    DOWN: OK
 
 zuul:
   routes:
-    dof-bungalows-service:
+    bungalows-service:
           path: /forestbungalow/**
-          serviceId: dof-bungalows-service
-    dof-region-service:
+          serviceId: bungalows-service
+    region-service:
           path: /forestregion/**
-          serviceId: dof-region-service
-    dof-requestertype-service:
+          serviceId: region-service
+    requestertype-service:
           path: /forestrequestertype/**
-          serviceId: dof-requestertype-service
-    dof-tax-service:
+          serviceId: requestertype-service
+    tax-service:
           path: /foresttax/**
-          serviceId: dof-tax-service
-    dof-reservation-service:
+          serviceId: tax-service
+    reservation-service:
           path: /forestreservation/**
-          serviceId: dof-reservation-service
-    dof-receipts-service:
+          serviceId: reservation-service
+    receipts-service:
           path: /forestreceipts/**
-          serviceId: dof-receipts-service
-    dof-rate-service:
+          serviceId: receipts-service
+    rate-service:
           path: /forestrate/**
-          serviceId: dof-rate-service
-    dof-permits-service:
+          serviceId: rate-service
+    permits-service:
           path: /forestpermits/**
-          serviceId: dof-permits-service
-    dof-availability-service:
+          serviceId: permits-service
+    availability-service:
           path: /forestavailability/**
-          serviceId: dof-availability-service
-    dof-payment-service:
+          serviceId: availability-service
+    payment-service:
           path: /forestpayment/**
-          serviceId: dof-payment-service
-    dof-notification-service:
+          serviceId: payment-service
+    notification-service:
           path: /forestnotification/**
-          serviceId: dof-notification-service
-    notification-test:
-          path: /forestnotificationtest/**
-          serviceId: notification-test      
-    dof-user-service:
+          serviceId: notification-service
+    user-service:
           path: /forestuser/**
-          serviceId: dof-user-service
-    dof-role-service:
+          serviceId: user-service
+    role-service:
           path: /forestrole/**
-          serviceId: dof-role-service
-    dof-permission-service:
+          serviceId: role-service
+    permission-service:
           path: /forestpermission/**
-          serviceId: dof-permission-service
-    masl-bungalows-service:
-          path: /maslbungalow/**
-          serviceId: masl-bungalows-service
-    masl-region-service:
-          path: /maslregion/**
-          serviceId: masl-region-service
-    masl-requestertype-service:
-          path: /maslrequestertype/**
-          serviceId: masl-requestertype-service
-    masl-tax-service:
-          path: /masltax/**
-          serviceId: masl-tax-service
-    masl-reservation-service:
-          path: /maslreservation/**
-          serviceId: masl-reservation-service
-    masl-receipts-service:
-          path: /maslreceipts/**
-          serviceId: masl-receipts-service
-    masl-rate-service:
-          path: /maslrate/**
-          serviceId: masl-rate-service
-    masl-permits-service:
-          path: /maslpermits/**
-          serviceId: masl-permits-service
-    masl-availability-service:
-          path: /maslavailability/**
-          serviceId: masl-availability-service
-    masl-payment-service:
-          path: /maslpayment/**
-          serviceId: masl-payment-service
-    masl-notification-service:
-          path: /maslnotification/**
-          serviceId: masl-notification-service
-    masl-user-service:
-          path: /masluser/**
-          serviceId: masl-user-service
-    masl-role-service:
-          path: /maslrole/**
-          serviceId: masl-role-service
-    masl-permission-service:
-          path: /maslpermission/**
-          serviceId: masl-permission-service 
-    masl-roomtype-service:
-          path: /maslroomtype/**
-          serviceId: masl-roomtype-service
-    masl-rooms-service:
-          path: /maslroom/**
-          serviceId: masl-rooms-service
-  ignored-headers: Access-Control-Allow-Credentials, Access-Control-Allow-Origin 
-
-  
-eureka:
-  instance:
-    preferIpAddress: true
-    #leaseRenewalIntervalInSeconds: 1
-    #leaseExpirationDurationInSeconds: 2
-  client:
-    serviceUrl:
-      defaultZone: http://localhost:8761/eureka/
-    healthcheck:
-      enabled: false
-    #lease:
-      #duration: 5
-      
+          serviceId: permission-service          
+spring:
+  application:
+    name: edge-server
+              
 ribbon:
   eureka:
-    enabled: true
-  restclient:
     enabled: true
 
 hystrix:
@@ -133,9 +66,8 @@ hystrix:
     default:
       execution:
         isolation:
-          strategy: THREAD
           thread:
-            timeoutInMilliseconds: 60000
+            timeoutInMilliseconds: 120000
 
 server:
   port: 8086
@@ -145,17 +77,3 @@ logging:
   level:
     ROOT: INFO
     org.springframework.web: DEBUG
-    
-management:
- security:
-  enabled: false
-  info:
-   git:
-    mode: full
-tokenUser: masluser
-tokenPassword: DghT@4%
-tokenLifeTime: 86400000
-tokenIssuer: MASL
-tokenSecret: MASLTokenSecret
-tokenSubject: MASLServerAccess
-tokenId: MASLTokenId
